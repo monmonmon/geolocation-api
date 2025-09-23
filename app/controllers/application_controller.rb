@@ -17,7 +17,7 @@ class ApplicationController < ActionController::API
         ]
       when ActiveRecord::RecordNotFound
         [
-          e.message || "Not found",
+          "Not found",
           :not_found,
         ]
       else
