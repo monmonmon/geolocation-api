@@ -6,7 +6,7 @@ class Geolocations::UrlController < ApplicationController
   end
 
   def create
-    @geolocation = Geolocation.build_by_url(params[:url])
+    @geolocation = Geolocation.build_by_url(params[:url]) rescue nil
     if @geolocation&.save
       render :show, status: :created
     else

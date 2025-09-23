@@ -12,7 +12,7 @@ class Geolocation < ApplicationRecord
     end
 
     def build_by_ipaddress(ip)
-      return unless Resolv::IPv4::Regex.match ip
+      raise "Invalid IP address" unless Resolv::IPv4::Regex.match ip
       latitude, longitude = GeolocationService.ip_to_geolocation(ip)
       build(
         latitude: latitude,
@@ -22,9 +22,9 @@ class Geolocation < ApplicationRecord
     end
 
     def build_by_url(url)
-      return unless URI.regexp.match url
+      raise "Invalid URL" unless URI.regexp.match url
       host = GeolocationService.extract_host_from_url(url)
-      return unless host
+      raise "Invalid URL" unless host
       ip = GeolocationService.resolve_hostname(host)
       geo = build_by_ipaddress(ip)
       geo.url_fqdn = host
