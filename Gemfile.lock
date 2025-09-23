@@ -72,8 +72,6 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt_pbkdf (1.1.1)
@@ -84,11 +82,6 @@ GEM
     brakeman (7.1.0)
       racc
     builder (3.3.0)
-    bullet (8.0.8)
-      activesupport (>= 3.0.0)
-      uniform_notifier (~> 1.11)
-    childprocess (5.1.0)
-      logger (~> 1.5)
     coderay (1.1.3)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.4)
@@ -149,30 +142,7 @@ GEM
       sshkit (>= 1.23.0, < 2.0)
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
-    kaminari (1.2.2)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.2.2)
-      kaminari-activerecord (= 1.2.2)
-      kaminari-core (= 1.2.2)
-    kaminari-actionview (1.2.2)
-      actionview
-      kaminari-core (= 1.2.2)
-    kaminari-activerecord (1.2.2)
-      activerecord
-      kaminari-core (= 1.2.2)
-    kaminari-core (1.2.2)
     language_server-protocol (3.17.0.5)
-    launchy (3.1.1)
-      addressable (~> 2.8)
-      childprocess (~> 5.0)
-      logger (~> 1.6)
-    letter_opener (1.10.0)
-      launchy (>= 2.2, < 4)
-    letter_opener_web (3.0.0)
-      actionmailer (>= 6.1)
-      letter_opener (~> 1.9)
-      railties (>= 6.1)
-      rexml
     lint_roller (1.1.0)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -237,7 +207,6 @@ GEM
     psych (5.2.6)
       date
       stringio
-    public_suffix (6.0.2)
     puma (7.0.3)
       nio4r (~> 2.0)
     raabro (1.4.0)
@@ -293,7 +262,6 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.2)
       io-console (~> 0.5)
-    rexml (3.4.4)
     rspec-core (3.13.5)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -380,8 +348,6 @@ GEM
       net-ssh (>= 2.8.0)
       ostruct
     stringio (3.1.7)
-    strip_attributes (2.0.1)
-      activemodel (>= 3.0, < 9.0)
     thor (1.4.0)
     thruster (0.1.15)
     thruster (0.1.15-aarch64-linux)
@@ -393,7 +359,6 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    uniform_notifier (1.18.0)
     uri (1.0.3)
     useragent (0.16.11)
     websocket-driver (0.8.0)
@@ -416,7 +381,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
-  bullet
   database_cleaner-active_record
   debug
   dotenv
@@ -424,8 +388,6 @@ DEPENDENCIES
   faker
   jb
   kamal
-  kaminari
-  letter_opener_web
   pry-rails
   puma (>= 5.0)
   rack-cors
@@ -442,7 +404,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen
   sqlite3 (>= 2.1)
-  strip_attributes
   thruster
   tzinfo-data
 

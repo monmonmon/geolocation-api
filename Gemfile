@@ -53,8 +53,6 @@ group :development do
   gem "rubocop-rails-omakase", require: false
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
-  gem "bullet"
-  gem "letter_opener_web"
 end
 
 group :test do
@@ -63,8 +61,6 @@ group :test do
 end
 
 gem "pry-rails"
-gem "kaminari"
 gem "dotenv"
-gem "strip_attributes"
 # A simpler and faster Jbuilder alternative https://github.com/amatsuda/jb
 gem "jb"
