@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Geolocation, type: :model do
   before :each do
-    allow(GeolocationService).to receive(:ip_to_geolocation)
-      .and_return([12.345678, 98.765432])
+    define_stab_for_api_access()
   end
 
   before :each do
@@ -29,18 +28,21 @@ RSpec.describe Geolocation, type: :model do
     end
 
     it "fails to find a record with a URL missing a protocol" do
-      g = Geolocation.find_by_url!("example.com")
-      expect(g).to be_nil
+      expect {
+        Geolocation.find_by_url!("example.com")
+      }.to raise_error(RuntimeError)
     end
 
     it "fails to find a record when the passed URL is missing a protocol" do
-      g = Geolocation.find_by_url!("example.com")
-      expect(g).to be_nil
+      expect {
+        Geolocation.find_by_url!("example.com")
+      }.to raise_error(RuntimeError)
     end
 
     it "fails to find a record when the FQDN of the URL is not registered" do
-      g = Geolocation.find_by_url!("not-registered.com")
-      expect(g).to be_nil
+      expect {
+        Geolocation.find_by_url!("not-registered.com")
+      }.to raise_error(RuntimeError)
     end
   end
 
@@ -55,7 +57,7 @@ RSpec.describe Geolocation, type: :model do
     it "raises an error when the passed IP address is in a wrong format" do
       expect {
         g = Geolocation.build_by_ipaddress("1.1.1.999")
-      }.to raise_error
+      }.to raise_error(RuntimeError)
     end
   end
 
@@ -70,7 +72,7 @@ RSpec.describe Geolocation, type: :model do
     it "raises an error when the passed IP address is in a wrong format" do
       expect {
         g = Geolocation.build_by_url("xxx")
-      }.to raise_error
+      }.to raise_error(RuntimeError)
     end
   end
 end

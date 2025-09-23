@@ -31,9 +31,7 @@ RSpec.describe "/geolocations/url", type: :request do
 
   describe "POST /create" do
     before :each do
-      # define a stub to bypass api access and circumvent the rate limit
-      allow(GeolocationService).to receive(:ip_to_geolocation)
-        .and_return([12.345678, 98.765432])
+      define_stab_for_api_access()
     end
 
     it "creates a new Geolocation record" do
