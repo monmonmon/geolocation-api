@@ -11,7 +11,7 @@ class GeolocationService
     end
 
     def resolve_hostname(hostname)
-      Resolv.getaddresses(hostname).find{|ip|
+      Resolv.getaddresses(hostname).find { |ip|
         Resolv::IPv4::Regex.match ip
       }
     end
