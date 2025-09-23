@@ -64,3 +64,4 @@ gem "pry-rails"
 gem "dotenv"
 # A simpler and faster Jbuilder alternative https://github.com/amatsuda/jb
 gem "jb"
+gem "faraday"
