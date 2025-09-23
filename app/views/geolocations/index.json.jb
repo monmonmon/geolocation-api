@@ -1,8 +1,0 @@
-@geolocations.map do |geolocation|
-  {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
-    ipaddress: geolocation.ipaddress,
-    url_fqdn: geolocation.url_fqdn,
-  }
-end
