@@ -5,8 +5,8 @@ class ApplicationController < ActionController::API
 
   def error500(e)
     if Rails.env.development?
-      Rails.logger.debug{e.inspect}
-      Rails.logger.debug{e.backtrace.join("\n")}
+      Rails.logger.debug { e.inspect }
+      Rails.logger.debug { e.backtrace.join("\n") }
     end
     message, status =
       case e
