@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe "/geolocations/ip", type: :request do
   before :each do
     @geolocation = Geolocation.find_or_create_by!({
-      latitude: 37.330528259277344,
-      longitude: -121.83822631835938,
+      latitude: 12.345678,
+      longitude: 98.765432,
       ipaddress: "1.1.1.1",
       url_fqdn: "example.com",
     })
@@ -35,6 +35,12 @@ RSpec.describe "/geolocations/ip", type: :request do
   end
 
   describe "POST /create" do
+    before :each do
+      # define a stub to bypass api access and circumvent the rate limit
+      allow(GeolocationService).to receive(:ip_to_geolocation)
+        .and_return([12.345678, 98.765432])
+    end
+
     it "creates a new Geolocation record" do
       expect {
         post geolocations_ip_index_url, params: { ip: "1.1.1.2" }, as: :json

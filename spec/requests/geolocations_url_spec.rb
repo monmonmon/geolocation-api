@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe "/geolocations/url", type: :request do
   before :each do
     @geolocation = Geolocation.find_or_create_by!({
-      latitude: 37.330528259277344,
-      longitude: -121.83822631835938,
+      latitude: 12.345678,
+      longitude: 98.765432,
       ipaddress: "1.1.1.1",
       url_fqdn: "example.com",
     })
@@ -30,16 +30,18 @@ RSpec.describe "/geolocations/url", type: :request do
   end
 
   describe "POST /create" do
+    before :each do
+      # define a stub to bypass api access and circumvent the rate limit
+      allow(GeolocationService).to receive(:ip_to_geolocation)
+        .and_return([12.345678, 98.765432])
+    end
+
     it "creates a new Geolocation record" do
       expect {
         post geolocations_url_index_url, params: { url: "https://test.com" }, as: :json
       }.to change(Geolocation, :count).by(1)
       g = Geolocation.last
       expect(g.url_fqdn).to eq "test.com"
-    end
-
-    it "updates the url_fqdn column of an existing record if the ip address of the specified url is already registered" do
-      skip
     end
 
     it "fails with 400 Bad Request when the ip address of the specified url is already registered" do

@@ -2,8 +2,13 @@ require "resolv"
 
 class GeolocationService
   class << self
-    def lookup(ip)
-      [37.330528259277344, -121.83822631835938]
+    def ip_to_geolocation(ip)
+      response = Faraday.get("https://api.ipstack.com/#{ip}", {
+        access_key: ENV["IPSTACK_ACCESS_KEY"],
+        format: 1,
+      })
+      data = JSON.parse(response.body)
+      [data["latitude"], data["longitude"]]
     end
 
     def extract_host_from_url(url)

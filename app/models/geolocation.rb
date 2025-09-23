@@ -13,7 +13,7 @@ class Geolocation < ApplicationRecord
 
     def build_by_ipaddress(ip)
       return unless Resolv::IPv4::Regex.match ip
-      latitude, longitude = GeolocationService.lookup(ip)
+      latitude, longitude = GeolocationService.ip_to_geolocation(ip)
       build(
         latitude: latitude,
         longitude: longitude,
