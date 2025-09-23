@@ -1,24 +1,51 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+# register records by ip addresses
+$ curl 'localhost:3000/geolocations/ip' -d ip=1.1.1.1
+{"latitude":"39.641369","longitude":"-104.95459","ipaddress":"1.1.1.1","url_fqdn":null}
+$ curl 'localhost:3000/geolocations/ip' -d ip=1.1.1.999
+{"error":"Failed"}
+$ curl 'localhost:3000/geolocations/ip' -d ip=x
+{"error":"Failed"}
 
-Things you may want to cover:
+# register records by urls
+$ curl 'localhost:3000/geolocations/url' -d url=https://example.com
+{"latitude":"39.043701","longitude":"-77.474197","ipaddress":"23.215.0.136","url_fqdn":"example.com"}
+$ curl 'localhost:3000/geolocations/url' -d url=example.com
+{"error":"Failed"}
+$ curl 'localhost:3000/geolocations/url' -d url=x
+{"error":"Failed"}
 
-* Ruby version
+# lookup by ip addresses
+$ curl 'localhost:3000/geolocations/ip/1.1.1.1'
+{"latitude":"39.641369","longitude":"-104.95459","ipaddress":"1.1.1.1","url_fqdn":null}
+$ curl 'localhost:3000/geolocations/ip/1.1.1.255'
+{"error":"Not found"}
+$ curl 'localhost:3000/geolocations/ip/1.1.1.999'
+{"error":"invalid IP address: 1.1.1.999"}
+$ curl 'localhost:3000/geolocations/ip/x'
+{"error":"invalid IP address: x"}
 
-* System dependencies
+# lookup by urls
+$ curl 'localhost:3000/geolocations/url/https%3A%2F%2Fexample%2Ecom'
+{"latitude":"-89.215041","longitude":"-154.909556","ipaddress":"1.2.3.4","url_fqdn":"example.com"}
+$ curl 'localhost:3000/geolocations/url/https%3A%2F%2Fexample%2Enosuchdomain'
+{"error":"Not found"}
+$ curl 'localhost:3000/geolocations/url/xx'
+{"error":"invalid URL: xx"}
 
-* Configuration
+# delete by ip addresses
+$ curl 'localhost:3000/geolocations/ip/1.1.1.1' -XDELETE # 204 No Content
+$ curl 'localhost:3000/geolocations/ip/1.1.1.255' -XDELETE
+{"error":"Not found"}
+$ curl 'localhost:3000/geolocations/ip/1.1.1.999' -XDELETE
+{"error":"invalid IP address: 1.1.1.999"}
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# delete by urls
+$ curl 'localhost:3000/geolocations/url/https%3A%2F%2Fexample%2Ecom' -XDELETE # 204 No Content
+$ curl 'localhost:3000/geolocations/url/https%3A%2F%2Fexample%2Enosuchdomain' -XDELETE
+{"error":"Not found"}
+$ curl 'localhost:3000/geolocations/url/xx' -XDELETE
+{"error":"invalid URL: xx"}
+```
