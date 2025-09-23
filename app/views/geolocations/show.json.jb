@@ -1,9 +1,6 @@
 {
-  id: @geolocation.id,
   latitude: @geolocation.latitude,
   longitude: @geolocation.longitude,
   ipaddress: @geolocation.ipaddress,
   url_fqdn: @geolocation.url_fqdn,
-  created_at: @geolocation.created_at,
-  updated_at: @geolocation.updated_at
 }

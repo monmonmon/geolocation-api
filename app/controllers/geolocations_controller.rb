@@ -1,50 +1,42 @@
 class GeolocationsController < ApplicationController
-  before_action :set_geolocation, only: %i[ show update destroy ]
+  before_action :set_geolocation, only: %i[ index destroy ]
 
-  # GET /geolocations
   def index
-    @geolocations = Geolocation.all
-
-    render json: @geolocations
+    render :show
   end
 
-  # GET /geolocations/1
-  def show
-    render json: @geolocation
-  end
-
-  # POST /geolocations
   def create
-    @geolocation = Geolocation.new(geolocation_params)
-
-    if @geolocation.save
-      render json: @geolocation, status: :created, location: @geolocation
+    @geolocation =
+      if params[:ip].present?
+        Geolocation.build_by_ipaddress(params[:ip])
+      elsif params[:url].present?
+        Geolocation.build_by_url(params[:url])
+      end
+    if @geolocation&.save
+      render :show, status: :created, location: @geolocation
     else
-      render json: @geolocation.errors, status: :unprocessable_entity
+      render json: @geolocation.errors, status: :bad_request
     end
   end
 
-  # PATCH/PUT /geolocations/1
-  def update
-    if @geolocation.update(geolocation_params)
-      render json: @geolocation
-    else
-      render json: @geolocation.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /geolocations/1
   def destroy
     @geolocation.destroy!
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_geolocation
-      @geolocation = Geolocation.find(params.expect(:id))
+      @geolocation =
+        if (ip = params[:ip]).present?
+          raise ActionController::BadRequest.new("invalid IP address: #{ip}") unless Resolv::IPv4::Regex.match ip
+          Geolocation.find_by!(ipaddress: ip)
+        elsif (url = params[:url]).present?
+          raise ActionController::BadRequest.new("invalid URL: #{url}") unless URI.regexp.match url
+          Geolocation.find_by_url!(url)
+        else
+          raise ActionController::BadRequest.new("either ip or url parameter is required")
+        end
     end
 
-    # Only allow a list of trusted parameters through.
     def geolocation_params
       params.expect(geolocation: [ :latitude, :longitude, :ipaddress, :url_fqdn ])
     end
