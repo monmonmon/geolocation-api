@@ -6,7 +6,7 @@ class Geolocations::IpController < ApplicationController
   end
 
   def create
-    @geolocation = Geolocation.build_by_ipaddress(params[:ip])
+    @geolocation = Geolocation.build_by_ipaddress(params[:ip]) rescue nil
     if @geolocation&.save
       render :show, status: :created
     else
