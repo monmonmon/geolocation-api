@@ -136,7 +136,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jb (0.8.2)
-    json (2.14.1)
+    json (2.15.0)
     kamal (2.7.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
@@ -287,7 +287,7 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.6)
-    rubocop (1.75.8)
+    rubocop (1.80.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -295,10 +295,10 @@ GEM
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 2.9.3, < 3.0)
-      rubocop-ast (>= 1.44.0, < 2.0)
+      rubocop-ast (>= 1.46.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.47.0)
+    rubocop-ast (1.47.1)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
     rubocop-performance (1.26.0)
@@ -402,7 +402,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 8.0.2, >= 8.0.2.1)
   rspec-rails
-  rubocop (~> 1.75.1)
+  rubocop (~> 1.80.2)
   rubocop-performance
   rubocop-rails
   rubocop-rails-omakase
