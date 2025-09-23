@@ -45,7 +45,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen"
   # RuboCop https://github.com/rubocop/rubocop
-  gem "rubocop", "~> 1.75.1", require: false
+  gem "rubocop", "~> 1.80.2", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec"
