@@ -10,7 +10,7 @@ class Geolocations::UrlController < ApplicationController
     if @geolocation&.save!
       render :show, status: :created
     else
-      render json: {"error": "Failed"}, status: :bad_request
+      render json: { "error": "Failed" }, status: :bad_request
     end
   end
 
